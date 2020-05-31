@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>weather app</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+<style media="screen">
+  footer h3{
+    text-align: center;
+    font-weight: bold;
+  }
+  form{
+    align-items: center;
+  }
+</style>
+
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+           Know the weather!
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+<form method="post">
+  {% csrf_token%}
+
+      {{form.name}}
+
+  &nbsp;<br>  <button type="submit" class="button is-primary is-outlined" name="button"> Find </button>
+</form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                  <div class="box">
+
+{%if weather%}
+  <article class="media">
+      <div class="media-left">
+          <figure class="image is-50x50">
+              <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+          </figure>
+      </div>
+      <div class="media-content">
+          <div class="content">
+              <p>
+                  <span class="title">{{ weather.city }}</span>
+                  <br>
+                  <span class="subtitle">{{ weather.temperature }}° F</span>
+                  <br> {{ weather.description }}
+              </p>
+          </div>
+      </div>
+  </article>
+{% endif %}
+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%if info%}
+    <footer class="footer">
+
+      <h3>{{info}}</h3>
+    </footer>
+    {%endif%}
+</body>
+</html>
